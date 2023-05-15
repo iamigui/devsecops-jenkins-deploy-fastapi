@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<style>
+    html {
+            font-family: sans-serif;
+        }
+
+    body {
+            margin: 30px;
+        }
+</style>
+<html>
+    <body>
+    <h1>Create new post:</h1>
+    <form action="/add" method="POST">
+        <label for="title">Title:</label> <br>
+        <input type="text" id="title" name="title" required><br>
+        <label for="author">Author:</label> <br>
+        <input type="text" id="author" name="author" required><br>
+        <label for="content">Content:</label> <br>
+        <textarea id="content" name="content" rows="4" cols="50" required></textarea><br>
+        <label for="refs_links">Links:</label> <br>
+        <input type="text" id="refs_links" name="link1" required><br>
+        <input type="text" id="refs_links" name="link2"><br>
+        <input type="text" id="refs_links" name="link3"><br>
+        <input type="text" id="refs_links" name="link4"><br>
+        <input type="text" id="refs_links" name="link5"><br>
+        <input type="submit" value="Submit">
+    </form>
+    </body>
+</html>

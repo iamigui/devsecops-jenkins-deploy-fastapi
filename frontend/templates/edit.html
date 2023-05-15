@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<style>
+    html {
+            font-family: sans-serif;
+        }
+
+    body {
+            margin: 30px;
+        }
+</style>
+<html>
+    <body>
+        <h1>Edit post:</h1>
+        <form action="/edit/{{data._id}}" method="POST">
+            <label for="title">Title:</label> <br>
+            <input type="text" id="title" name="title" value="{{data.title}}"" required><br>
+            <label for="author">Author:</label> <br>
+            <input type="text" id="author" name="author" value="{{data.author}}" required><br>
+            <label for="content">Content:</label> <br>
+            <textarea id="content" name="content" rows="4" cols="50">{{data.content}}</textarea><br>
+            <label for="refs_links">Links:</label> <br>
+            <input type="text" id="refs_links" name="link1" value="{{data.refs_links[0]}}" required><br>
+            <input type="text" id="refs_links" name="link2" value="{{data.refs_links[1]}}"><br>
+            <input type="text" id="refs_links" name="link3" value="{{data.refs_links[2]}}"><br>
+            <input type="text" id="refs_links" name="link4" value="{{data.refs_links[3]}}"><br>
+            <input type="text" id="refs_links" name="link5" value="{{data.refs_links[4]}}"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
