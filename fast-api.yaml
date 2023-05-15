@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fast-api
-        image: weboduroxd/backend:v6
+        image: 659026651741.dkr.ecr.us-east-1.amazonaws.com/asg
         resources:
           limits:
             memory: "128Mi"
