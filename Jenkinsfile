@@ -39,14 +39,6 @@ pipeline {
  			}
  		}
  	}
-
-	stage('Installing packages') {
-            steps {
-                script {
-                    sh 'pip -r requirements.txt'
-                }
-            }
-        }
  
  	// Uploading Docker images into AWS ECR
  	stage('Pushing to ECR') {
