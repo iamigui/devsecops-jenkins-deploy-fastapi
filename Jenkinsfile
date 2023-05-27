@@ -1,10 +1,3 @@
-sonarqube {
-  properties {
-    property("sonar.projectKey", "MySecretToken")
-    property("sonar.organization", "webodevops")
-    property("sonar.host.url", "https://sonarcloud.io")
-  }
-}
 pipeline {
   agent any
   environment {
