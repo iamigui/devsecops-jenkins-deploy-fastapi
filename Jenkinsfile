@@ -12,12 +12,16 @@ pipeline {
 	snyk 'snyk-latest'
     }
    stages{
-    stage('SonarQube analysis') {
-      def scannerHome = tool 'sonar4.7';
-      withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name
-	sh "${scannerHome}/bin/sonar-scanner"
-	 }
-       }
+	stage('SonarQube analysis') {
+	  steps {
+	    script {
+	      def scannerHome = tool 'sonar4.7'
+	      withSonarQubeEnv('sonar') {
+		sh "${scannerHome}/bin/sonar-scanner"
+	      }
+	    }
+	  }
+	}
 
     stage('snyk dependency scan') {      	
       steps {
