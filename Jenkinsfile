@@ -13,9 +13,11 @@ pipeline {
     }
    stages{
 	  stage('SonarQube analysis') {
-	    withSonarQubeEnv(sonar) { // Will pick the global server connection you have configured
-	      sh './gradlew sonarqube'
-	    }
+		  steps{	  
+	    		withSonarQubeEnv(sonar) { // Will pick the global server connection you have configured
+	      			sh './gradlew sonarqube'
+	    		}
+		  }
 	  }
 
     stage('snyk dependency scan') {      	
