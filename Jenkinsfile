@@ -20,7 +20,7 @@ pipeline {
     stage('snyk dependency scan') {
       tools {
         snyk 'snyk-latest'
-      }	
+      	
       steps {
         snykSecurity(
           organisation: 'webodevops',
@@ -30,7 +30,8 @@ pipeline {
           targetFile: 'requirements.txt',
           failOnIssues: 'true'
         )		
-      }		
+      }	
+      }
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
