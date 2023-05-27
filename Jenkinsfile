@@ -12,11 +12,11 @@ pipeline {
 	snyk 'snyk-latest'
     }
    stages{
-    stage('CompileandRunSonarAnalysis') {
-            steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=devsecops-proyecto -Dsonar.organization=proyectointegrado -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6d761c55644254693eda0770d98772839b6b3b14'
-			}
-    }
+	  stage('SonarQube analysis') {
+	    withSonarQubeEnv() { // Will pick the global server connection you have configured
+	      sh './gradlew sonarqube'
+	    }
+	  }
 
     stage('snyk dependency scan') {      	
       steps {
