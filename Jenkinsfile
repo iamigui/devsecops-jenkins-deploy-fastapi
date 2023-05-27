@@ -1,7 +1,3 @@
-def COLOR_MAP = [
-	'SUCCESS': 'good',
-	'FAILURE': 'danger',
-]
 pipeline {
   agent any
   environment {
@@ -65,22 +61,14 @@ pipeline {
 	//    	}
 	//    }
 
-	stage('RunDASTUsingZAP') {
-          steps {
-		    withKubeConfig([credentialsId: 'kubelogin']) {
-				sh('zap.sh -cmd -quickurl http://$(kubectl get services --namespace=devsecops -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
-				archiveArtifacts artifacts: 'zap_report.html'
-		    }
-	     }
-       } 
-    }
-	post {
-            always {
-				echo 'Slack Notifications.'
-				slackSend channel: '#testing-de-software',
-					color: COLOR_MAP[currentBuild.currentResult],
-					message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
-		}
-    }
+// 	stage('RunDASTUsingZAP') {
+//           steps {
+// 		    withKubeConfig([credentialsId: 'kubelogin']) {
+// 				sh('zap.sh -cmd -quickurl http://$(kubectl get services --namespace=devsecops -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
+// 				archiveArtifacts artifacts: 'zap_report.html'
+// 		    }
+// 	     }
+//        } 
+//     }
 }
 
