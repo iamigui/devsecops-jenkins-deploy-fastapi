@@ -13,11 +13,10 @@ pipeline {
     }
    stages{
 	  stage('SonarQube analysis') {
-		  steps{	  
-	    		withSonarQubeEnv(sonar) { // Will pick the global server connection you have configured
-	      			sh './gradlew sonarqube'
-	    		}
-		  }
+	    def scannerHome = tool 'sonar4.7';
+	    withSonarQubeEnv('sonar') { // If you have configured more than one global server connection, you can specify its name
+	      sh "${scannerHome}/bin/sonar-scanner"
+	    }
 	  }
 
     stage('snyk dependency scan') {      	
