@@ -17,7 +17,11 @@ pipeline {
 	    script {
 	      def scannerHome = tool 'sonar4.7'
 	      withSonarQubeEnv('sonar') {
-		sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devsecops-jenkins-deploy-fastapi"
+		sh "sonar-scanner \
+  -Dsonar.projectKey=fastapi \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://54.162.141.174 \
+  -Dsonar.login=sonar"
 	      }
 	    }
 	  }
