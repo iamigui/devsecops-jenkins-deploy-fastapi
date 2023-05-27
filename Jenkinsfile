@@ -11,14 +11,26 @@ pipeline {
         maven 'Maven_3_5_2'  
     }
    stages{
-
-	stage('RunSCAAnalysisUsingSnyk') {
-            steps {		
-				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
+    stage('CompileandRunSonarAnalysis') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=devsecops-proyecto -Dsonar.organization=proyectointegrado -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6d761c55644254693eda0770d98772839b6b3b14'
 			}
-    }		
+    }
+
+    stage('snyk dependency scan') {
+      tools {
+        snyk 'snyk-latest'
+      }	
+      steps {
+        snykSecurity(
+          organisation: 'webodevops',
+          severity: 'high',
+          snykInstallation: 'snyk-latest',
+          snykTokenId: 'SNYK_TOKEN',
+          targetFile: 'requirements.txt',
+          failOnIssues: 'true'
+        )		
+      }		
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
