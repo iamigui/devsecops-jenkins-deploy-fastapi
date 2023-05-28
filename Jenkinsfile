@@ -19,8 +19,11 @@ pipeline {
         }
 	stage('Snyk Test') {
 	  steps {
-	    snykSecurity additionalArguments: 'python3 -m pip install -r requirements.txt', failOnIssues: false, organisation: 'webodevops', projectName: 'fastapi', snykInstallation: 'snyk-latest', snykTokenId: 'SNYK_TOKEN2', targetFile: 'requirements.txt'
-	  }
+		snykSecurity(
+		  snykInstallation: 'snyk-latest',
+		  snykTokenId: 'SNYK_TOKEN2',
+		  // place other optional parameters here, for example:
+		  additionalArguments: '--all-projects'	  }
 	}
 	stage('Logging into AWS ECR') {
  		steps {
