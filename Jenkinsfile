@@ -24,7 +24,6 @@ pipeline {
                     }
                 }
             }
-        }
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
