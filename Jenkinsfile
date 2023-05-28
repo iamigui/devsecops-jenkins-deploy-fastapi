@@ -8,7 +8,7 @@ pipeline {
   REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
   }
   tools { 
-        maven 'Maven_3_5_2' 
+        maven 'Maven_3_5_2', 
 	snyk 'snyk-latest'
     }
    stages{
