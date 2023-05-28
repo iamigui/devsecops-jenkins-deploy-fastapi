@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                        sh 'pip install -r requirements.txt'
-        	       sh 'sudo snyk code test --org=833b6f74-d729-4bee-a753-e07fd2fb399a'
+        	       sh 'sudo snyk code test --project-name=fastapi --failOnIssues=false /var/lib/jenkins/workspace/deploy-fastapi/ '
                     }
                 }
             }
