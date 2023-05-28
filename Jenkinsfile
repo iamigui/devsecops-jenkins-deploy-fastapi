@@ -19,15 +19,7 @@ pipeline {
         }
 	stage('Snyk Test') {
 	  steps {
-	    script {
-	      def snykTestExitCode = sh returnStatus: true, script: 'sudo snyk code test --project-name=fastapi --html /var/lib/jenkins/workspace/deploy-fastapi/ > fastapi-results.txt'
-
-	      if (snykTestExitCode != 0) {
-		echo 'Snyk code test failed, but pipeline will continue'
-	      } else {
-		echo 'Snyk code test passed'
-	      }
-	    }
+	    snykSecurity organisation: 'webodevops', projectName: 'fastapi', snykInstallation: 'sonar', snykTokenId: 'SNYK_TOKEN2', targetFile: 'requirements.txt'
 	  }
 	}
 	stage('Logging into AWS ECR') {
