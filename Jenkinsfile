@@ -14,7 +14,7 @@ pipeline {
     stage('snyk dependency scan') {      	
       steps {
         snykSecurity(
-          snykSecurity organisation: 'webodevops', projectName: 'fastapi-test', snykInstallation: snykTokenId: 'SNYK_TOKEN2', targetFile: 'requirements.txt'
+          organisation: 'webodevops', projectName: 'fastapi-test', snykInstallation: snykTokenId: 'SNYK_TOKEN2', targetFile: 'requirements.txt'
         )		
       }	
       }
