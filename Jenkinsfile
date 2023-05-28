@@ -8,22 +8,16 @@ pipeline {
   REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
   }
   tools { 
-        maven 'Maven_3_5_2', 
-	snyk 'snyk-latest'
+        maven 'Maven_3_5_2'  
     }
    stages{
-    stage('snyk dependency scan') {      	
-      steps {
-        snykSecurity(
-          organisation: 'webodevops',
-          severity: 'high',
-          snykInstallation: 'snyk-latest',
-          snykTokenId: 'SNYK_TOKEN',
-          targetFile: 'requirements.txt',
-          failOnIssues: 'false'
-        )		
-      }	
-      }
+		 stage('RunSCAAnalysisUsingSnyk') {
+            steps {		
+				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+					sh 'mvn snyk:test -fn'
+				}
+			}
+    }
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
