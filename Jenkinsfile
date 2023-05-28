@@ -14,7 +14,7 @@ pipeline {
     stage('snyk dependency scan') {      	
       steps {
         snykSecurity(
-          organisation: 'webodevops', projectName: 'fastapi-test', snykTokenId: 'SNYK_TOKEN2', targetFile: 'requirements.txt'
+          organisation: 'webodevops', projectName: 'fastapi-test', snykInstallation: 'Please define a Snyk installation in the Jenkins Global Tool Configuration. This task will not run without a Snyk installation.', snykTokenId: 'SNYK_TOKEN2', targetFile: 'requirements.txt'
         )		
       }	
       }
