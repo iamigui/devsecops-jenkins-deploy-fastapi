@@ -18,7 +18,7 @@ pipeline {
           severity: 'high',
           snykInstallation: 'snyk-latest',
           snykTokenId: 'SNYK_TOKEN2',
-          targetFile: 'requirements.txt',
+          targetFile: 'Dockerfile',
           failOnIssues: 'false'
         )		
       }	
