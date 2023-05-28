@@ -20,7 +20,8 @@ pipeline {
         stage('Snyk Test') {
             steps {
                 script {
-                        sh 'pip install -r requirements.txt | sudo snyk test /var/lib/jenkins/workspace/deploy-fastapi/ --file=requirements.txt --command=python3'
+                       sh 'pip install -r requirements.txt'
+        	       sh 'sudo snyk test /var/lib/jenkins/workspace/deploy-fastapi/ --file=requirements.txt --command=python3'
                     }
                 }
             }
