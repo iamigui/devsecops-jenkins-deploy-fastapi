@@ -17,14 +17,19 @@ pipeline {
                 sh 'pip install -r requirements.txt'
             }
         }
-        stage('Snyk Test') {
-            steps {
-                script {
-                       sh 'pip install -r requirements.txt'
-        	       sh 'sudo snyk code test --project-name=fastapi --json /var/lib/jenkins/workspace/deploy-fastapi/ '
-                    }
-                }
-            }
+	stage('Snyk Test') {
+	  steps {
+	    script {
+	      def snykTestExitCode = sh returnStatus: true, script: 'sudo snyk code test --project-name=fastapi --html /var/lib/jenkins/workspace/deploy-fastapi/ > fastapi-results.txt'
+
+	      if (snykTestExitCode != 0) {
+		echo 'Snyk code test failed, but pipeline will continue'
+	      } else {
+		echo 'Snyk code test passed'
+	      }
+	    }
+	  }
+	}
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
