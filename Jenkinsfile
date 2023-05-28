@@ -23,13 +23,13 @@ pipeline {
                 sh 'pip install -r requirements.txt'
             }
         }
-    stage('snyk dependency scan') {      	
-      steps {
-        snykSecurity(
-          organisation: 'webodevops', projectName: 'fastapi-test', snykInstallation: 'snyk-latest', snykTokenId: 'SNYK_TOKEN2', targetFile: 'requirements.txt'
-        )		
-      }	
-      }
+        stage('Snyk Test') {
+            steps {
+                withCredentials([string(credentialsId: 'SNYK_TOKEN2', variable: 'SNYK_TOKEN2')]) {
+                    sh 'snyk test --all-projects --all-branches --org=webodevops --all-issues --json --project-name=fastapi --severity-threshold=high'
+                }
+            }
+        }
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
