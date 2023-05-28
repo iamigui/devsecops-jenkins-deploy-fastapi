@@ -23,7 +23,9 @@ pipeline {
 		  snykInstallation: 'snyk-latest',
 		  snykTokenId: 'SNYK_TOKEN2',
 		  // place other optional parameters here, for example:
-		  additionalArguments: '--all-projects'	  }
+		  additionalArguments: '--all-projects'	  
+		)
+		}
 	}
 	stage('Logging into AWS ECR') {
  		steps {
