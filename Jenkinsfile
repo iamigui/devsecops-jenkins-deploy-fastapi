@@ -19,8 +19,10 @@ pipeline {
         }
         stage('Snyk Test') {
             steps {
-                withCredentials([string(credentialsId: 'SNYK_TOKEN2', variable: 'SNYK_TOKEN2')]) {
-                    sh 'snyk test --all-projects --all-branches --org=webodevops --all-issues --json --project-name=fastapi --severity-threshold=high'
+                script {
+                    docker.image('snyk/snyk-cli:gradle-5.4').inside("-e \"SNYK_TOKEN=SNYK_TOKEN2\" -v \"${env.WORKSPACE}:/project\" -v \"/home/user/.gradle:/home/node/.gradle\"") {
+                        sh 'snyk test --all-projects --all-branches --org=webodevops --all-issues --json --project-name=fastapi --severity-threshold=high'
+                    }
                 }
             }
         }
