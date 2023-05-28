@@ -18,14 +18,12 @@ pipeline {
             }
         }
 	stage('Snyk Test') {
-	  steps {
-		snykSecurity(
-		  snykInstallation: 'snyk-latest',
-		  snykTokenId: 'SNYK_TOKEN2',
-		  // place other optional parameters here, for example:
-		  additionalArguments: '--all-projects'	  
-		)
-		}
+	   steps {
+                script {
+                       sh 'pip install -r requirements.txt'
+        	       sh 'sudo snyk code test --project-name=fastapi --html /var/lib/jenkins/workspace/deploy-fastapi/ > snyk-fastapi.txt'
+                    }
+                }
 	}
 	stage('Logging into AWS ECR') {
  		steps {
