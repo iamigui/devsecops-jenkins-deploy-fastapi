@@ -20,7 +20,7 @@ pipeline {
         stage('Snyk Test') {
             steps {
                 script {
-                        sh 'snyk test --file=requirements.txt --command=python3'
+                        sh 'sudo snyk test /var/lib/jenkins/workspace/deploy-fastapi@tmp/ --file=requirements.txt --command=python3'
                     }
                 }
             }
