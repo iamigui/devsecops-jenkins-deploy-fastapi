@@ -11,17 +11,22 @@ pipeline {
         maven 'Maven_3_5_2'  
     }
    stages{
-		 stage('RunSCAAnalysisUsingSnyk') {
-            steps {		
-				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
-			}
-    }
+    stage('snyk dependency scan') {      	
+      steps {
+        snykSecurity(
+          organisation: 'webodevops',
+          severity: 'high',
+          snykInstallation: 'snyk-latest',
+          snykTokenId: 'SNYK_TOKEN',
+          targetFile: 'requirements.txt',
+          failOnIssues: 'false'
+        )		
+      }	
+      }
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
- 			sh "sudo aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+ 			sh "sudo aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | sudo docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
  			}
  		}
  	}
