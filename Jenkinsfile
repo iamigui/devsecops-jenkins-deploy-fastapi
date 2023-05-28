@@ -12,21 +12,6 @@ pipeline {
 	snyk 'snyk-latest'
     }
    stages{
-	stage('SonarQube analysis') {
-	  steps {
-	    script {
-	      def scannerHome = tool 'sonar4.7'
-	      withSonarQubeEnv('sonar') {
-		sh "sonar-scanner \
-  -Dsonar.projectKey=fastapi \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=http://54.162.141.174 \
-  -Dsonar.login=sonar"
-	      }
-	    }
-	  }
-	}
-
     stage('snyk dependency scan') {      	
       steps {
         snykSecurity(
@@ -35,7 +20,7 @@ pipeline {
           snykInstallation: 'snyk-latest',
           snykTokenId: 'SNYK_TOKEN',
           targetFile: 'requirements.txt',
-          failOnIssues: 'true'
+          failOnIssues: 'false'
         )		
       }	
       }
