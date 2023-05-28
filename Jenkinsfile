@@ -9,14 +9,7 @@ pipeline {
   }
   tools { 
         maven 'Maven_3_5_2'  
-    }
-   stages{
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        
+    }        
         stage('Build') {
             steps {
                 // Aquí irían los pasos para construir tu proyecto en Python, por ejemplo:
