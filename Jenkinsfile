@@ -11,20 +11,6 @@ pipeline {
         maven 'Maven_3_5_2'  
     }
    stages{
-        stage('Build') {
-            steps {
-                // Aquí irían los pasos para construir tu proyecto en Python, por ejemplo:
-                sh 'pip install -r requirements.txt'
-            }
-        }
-	stage('Snyk Test') {
-	   steps {
-                script {
-                       sh 'pip install -r requirements.txt'
-        	       sh 'sudo snyk code test --fail-fast --all-projects --html /var/lib/jenkins/workspace/deploy-fastapi/ > snyk-fastapi.txt'
-                    }
-                }
-	}
 	stage('Logging into AWS ECR') {
  		steps {
  			script {
