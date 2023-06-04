@@ -41,7 +41,8 @@ pipeline {
 	stage('Kubernetes Deployment of Application') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl delete all --all -n devsecops')
+		  sh ('kubectl delete deployment fast-api-deployment --namespace devsecops')
+		  sh ('kubectl delete service fast-api-service --namespace devsecops')
 		  sh ('kubectl apply -f fast-api.yaml --namespace devsecops')
 		}
 	      }
