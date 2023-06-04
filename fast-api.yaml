@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fast-api
-        image: 659026651741.dkr.ecr.us-east-1.amazonaws.com/asg
+        image: 659026651741.dkr.ecr.us-east-1.amazonaws.com/asg:latest
         resources:
           limits:
             memory: "128Mi"
